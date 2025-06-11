@@ -1,0 +1,233 @@
+/* General Body and Background */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensures both html and body fill viewport */
+    font-family: sans-serif; /* You can replace this with your chosen font */
+    color: #F0F0F0; /* Light text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden; /* Prevents scrollbars if content slightly exceeds viewport */
+}
+
+.background-image {
+    position: fixed; /* Ensures background covers viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Viewport width */
+    height: 100vh; /* Viewport height */
+    background-image: url('background.jpg'); /* Your background image file */
+    background-size: cover; /* Ensures image covers entire container */
+    background-position: center; /* Centers the image */
+    filter: brightness(0.7) contrast(1.2); /* Adjust brightness/contrast to fit theme */
+    z-index: -1; /* Sends to back */
+}
+
+/* Main Content Wrapper for Centering */
+.main-content-wrapper {
+    position: relative;
+    z-index: 1; /* Brings to front */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh; /* Ensures main content takes full viewport height */
+}
+
+/* Profile Card Styling */
+.profile-card {
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(229, 9, 20, 0.4); /* Subtle red glow */
+    max-width: 400px; /* Max width for the card */
+    width: 90%; /* Responsive width */
+    transform: translateY(0); /* Initial position for potential animation */
+    transition: transform 0.5s ease-out;
+}
+
+/* Avatar Styling */
+.avatar-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.8), /* Red glow */
+                0 0 30px rgba(229, 9, 20, 0.4); /* Stronger red glow */
+    border: 2px solid #F0F0F0; /* Thin white border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Name and Status - Typing Animation */
+.name {
+    font-size: 2.8em;
+    margin-bottom: 5px;
+    color: #E50914; /* Changed to your theme's vibrant red */
+    text-shadow: 0 0 15px rgba(229, 9, 20, 0.8), /* Stronger glow for red text */
+                 0 0 25px rgba(229, 9, 20, 0.5); /* Added a wider, softer glow */
+    display: inline-block; /* Essential for caret animation */
+}
+
+/* Blinking Cursor for Typing Animation */
+.name #animated-name {
+    border-right: .15em solid #E50914; /* The blinking cursor, matching theme red */
+    white-space: nowrap; /* Keeps text on single line */
+    overflow: hidden; /* Hides the extra text until it's "typed" */
+    display: inline-block; /* For caret positioning */
+    vertical-align: top; /* Align with text */
+    animation: 
+        blink-caret .75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #E50914; } /* Ensure the caret also blinks red */
+}
+
+
+.status {
+    font-size: 1.2em;
+    color: #BBBBBB;
+    margin-bottom: 30px;
+}
+
+/* Social Links */
+.social-links {
+    margin-bottom: 30px;
+}
+
+.social-links a {
+    color: #F0F0F0; /* White icons */
+    font-size: 2em;
+    margin: 0 15px;
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+    display: inline-block; /* Allows transform */
+}
+
+.social-links a:hover {
+    color: #E50914; /* Red on hover */
+    text-shadow: 0 0 15px #E50914; /* Glowing effect */
+    transform: translateY(-5px) scale(1.1); /* Lift and grow slightly */
+}
+
+/* Music Player */
+.music-player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow: hidden; /* Hide overflowing text from song title */
+    position: relative; /* For absolute positioning of song title */
+    height: 30px; /* Give it a fixed height */
+}
+
+#music-toggle-btn {
+    background: none;
+    border: 2px solid #E50914; /* Red border */
+    color: #E50914; /* Red icon */
+    font-size: 1.5em;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.5); /* Subtle red glow */
+    flex-shrink: 0; /* Prevent button from shrinking */
+    margin-right: 15px; /* Space between button and song title */
+}
+
+#music-toggle-btn:hover {
+    background-color: rgba(229, 9, 20, 0.2);
+    box-shadow: 0 0 20px #E50914, 0 0 30px rgba(229, 9, 20, 0.3); /* Stronger glow on hover */
+}
+
+/* Moving Song Title */
+.song-title-wrapper {
+    flex-grow: 1; /* Allows it to take available space */
+    white-space: nowrap; /* Keep text on one line */
+    overflow: hidden; /* Hide text that overflows */
+    position: relative;
+    text-align: left; /* Align text to the left within its wrapper */
+}
+
+#animated-song-title {
+    display: inline-block;
+    color: #BBBBBB; /* Song title text color */
+    font-size: 0.9em;
+    /* Initial position for the animation */
+    transform: translateX(0);
+    transition: transform 0.1s linear; /* Smooth transition for stopping/starting */
+}
+
+/* Animation for the moving song title */
+.moving-text {
+    animation: moveSongTitle 10s linear infinite; /* Adjust duration based on song length */
+}
+
+@keyframes moveSongTitle {
+    0% { transform: translateX(100%); } /* Start off-screen right */
+    100% { transform: translateX(-100%); } /* End off-screen left */
+}
+
+
+/* Location */
+.location {
+    font-size: 1em;
+    color: #BBBBBB;
+    margin-top: 20px;
+}
+
+/* Basic Responsiveness */
+@media (max-width: 600px) {
+    .profile-card {
+        padding: 25px;
+        max-width: 95%;
+    }
+
+    .avatar-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .name {
+        font-size: 2.2em;
+    }
+
+    .status {
+        font-size: 1em;
+    }
+
+    .social-links a {
+        font-size: 1.8em;
+        margin: 0 10px;
+    }
+
+    #music-toggle-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3em;
+    }
+
+    .song-title-wrapper {
+        font-size: 0.8em;
+        margin-left: 10px;
+    }
+}

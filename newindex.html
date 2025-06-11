@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubham - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="background-image"></div>
+
+    <div class="main-content-wrapper">
+        <div class="profile-card">
+            <div class="avatar-container">
+                <img src="avatar.png" alt="Shubham's Avatar" class="avatar">
+            </div>
+            <h1 class="name"><span id="animated-name"></span></h1>
+            <p class="status">Dnd</p>
+
+            <div class="social-links">
+                <a href="https://discordapp.com/users/scout08317" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                <a href="https://www.instagram.com/shubhh_x18/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.snapchat.com/add/shubhh_x18" target="_blank" aria-label="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            </div>
+
+            <div class="music-player">
+                <audio id="apocalypse-music" src="apocalypse.m4a" loop></audio> <button id="music-toggle-btn" aria-label="Play/Pause Music">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="song-title-wrapper">
+                    <span id="animated-song-title">Apocalypse - CAS</span>
+                </div>
+            </div>
+
+            <p class="location">India</p>
+        </div>
+    </div>
+
+    <script>
+        // Name Typing Animation
+        const nameElement = document.getElementById('animated-name');
+        const nameText = "Shubham";
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < nameText.length) {
+                nameElement.textContent += nameText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 150); // Typing speed (milliseconds)
+            } else {
+                // Optional: You could add a blinking cursor effect here
+            }
+        }
+
+        // Music Player Controls
+        const music = document.getElementById('apocalypse-music');
+        const musicToggleButton = document.getElementById('music-toggle-btn');
+        const musicIcon = musicToggleButton.querySelector('i');
+        const animatedSongTitle = document.getElementById('animated-song-title');
+        const songTitleWrapper = document.querySelector('.song-title-wrapper'); // Get the wrapper
+
+        let isPlaying = false;
+
+        musicToggleButton.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-play');
+                animatedSongTitle.classList.remove('moving-text'); // Stop moving animation
+            } else {
+                music.play().catch(error => {
+                    console.error("Music autoplay failed:", error);
+                    alert("Autoplay blocked by browser. Please click again to play music.");
+                });
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+                animatedSongTitle.classList.add('moving-text'); // Start moving animation
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Start typing animation when the page loads
+        document.addEventListener('DOMContentLoaded', typeWriter);
+
+        // Optional: Reset typing animation on re-load if you want
+        // window.addEventListener('beforeunload', () => { charIndex = 0; nameElement.textContent = ''; });
+    </script>
+</body>
+</html>
